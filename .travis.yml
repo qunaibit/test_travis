@@ -30,8 +30,8 @@ before_install:
   - python --version
   - export PATH=$PWD/../mx:$PATH
   # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export JAVA_HOME=/usr/lib/jvm/java-8-oracle; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export JVMs=/Library/Java/JavaVirtualMachines; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export JAVA_HOME=$JMVs/${$(ls $JMVs)[1]}/Contents/Home; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export JVMS=/Library/Java/JavaVirtualMachines; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export JAVA_HOME=$JVMS/${$(ls $JVMS)[1]}/Contents/Home; fi
   - echo $JAVA_HOME
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home; fi
   - export DEFAULT_VM=server
