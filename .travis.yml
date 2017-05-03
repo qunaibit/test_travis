@@ -9,6 +9,11 @@ matrix:
       dist: trusty
       env: ZIPPY_JDK_TYPE=STANDARD_LINUX
       jdk: oraclejdk8
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+
 #    - os: linux
 #      dist: trusty
 #      env: ZIPPY_JDK_TYPE=GRAALJVM_LINUX
