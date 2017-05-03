@@ -18,9 +18,9 @@ matrix:
 #      dist: trusty
 #      env: ZIPPY_JDK_TYPE=GRAALJVM_LINUX
 #      jdk: oraclejdk8
-#    - os: osx
-#      env: ZIPPY_JDK_TYPE=STANDARD_OSX
-#      osx_image: xcode8.1
+    - os: osx
+      env: ZIPPY_JDK_TYPE=STANDARD_OSX
+      osx_image: xcode8.1
 #    - os: osx
 #      env: ZIPPY_JDK_TYPE=GRAALJVM_OSX
 #      osx_image: xcode8.1
