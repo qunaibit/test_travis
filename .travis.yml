@@ -51,6 +51,7 @@ before_install:
   - which java
   - java -version
   - hg --version
+  - hg clone http://hg.openjdk.java.net/graal/graal-jvmci-8 ../graal-jvmci-8
   - python --version
 
 
