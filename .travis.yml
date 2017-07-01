@@ -17,6 +17,7 @@ matrix:
             - oracle-java8-installer
     - os: linux
       dist: trusty
+      sudo: required
       env: 
         - ZIPPY_JDK_TYPE=GRAALJVM_LINUX
         - IS_GRAALJVM=TRUE
