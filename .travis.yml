@@ -39,6 +39,7 @@ matrix:
 before_install:
   - echo $TRAVIS_OS_NAME
   - git clone https://github.com/securesystemslab/zippy.git ../zippy
+  - cd ../zippy
   - java -version
   - hg --version
   - python --version
