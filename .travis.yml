@@ -10,7 +10,7 @@ matrix:
       env: 
         - ZIPPY_JDK_TYPE=STANDARD_LINUX
         - IS_GRAALJVM=FASLE
-      jdk: oraclejdk8
+      jdk: openjdk8
       addons:
         apt:
           packages:
@@ -21,7 +21,7 @@ matrix:
       env: 
         - ZIPPY_JDK_TYPE=GRAALJVM_LINUX
         - IS_GRAALJVM=TRUE
-      jdk: oraclejdk8
+      jdk: openjdk8
       addons:
         apt:
           packages:
@@ -39,8 +39,6 @@ matrix:
 
 before_install:
   - echo $TRAVIS_OS_NAME
-  - git clone https://github.com/securesystemslab/zippy.git ../zippy
-  - cd ../zippy
   - java -version
   - hg --version
   - python --version
@@ -52,38 +50,11 @@ before_install:
         export JAVA_HOME=$(/usr/libexec/java_home); 
     fi
   - echo $JAVA_HOME
-  - export DEFAULT_VM=server
-  - git clone https://github.com/graalvm/mx.git ../mx
-  - export PATH=$PWD/../mx:$PATH
-
-install:
-  - if [ "$IS_GRAALJVM" == "TRUE" ]; then 
-        cd ..;
-        hg clone http://hg.openjdk.java.net/graal/graal-jvmci-8;
-        cd graal-jvmci-8;
-        hg update jvmci-0.28;
-        mx build;
-        export JAVA_HOME=$(mx jdkhome);
-        echo $JAVA_HOME;
-        mx jdkhome;
-        cd ../zippy;
-        export DEFAULT_DYNAMIC_IMPORTS=truffle/compiler;
-        export ZIPPY_MUST_USE_GRAAL=1; 
-    fi
-
-
-before_script:
-  - mx build
 
 script:
-  - mx -v junit-default
-  - mx -v junit
-  - mx -v gate --tags pythontest
-  - mx -v gate --tags pythonbenchmarktest > .out_bt
-  - echo "$(head -n35 < .out_bt)" && echo && echo && echo "......omitted......" && echo && echo && echo "$(tail -n18 < .out_bt)"
+  - echo $JAVA_HOME
 
 after_success:
-  - rm .out_bt
   - echo "SUCCESSFUL build and test :)"
 
 after_failure:
