@@ -3,46 +3,45 @@ language: java
 git:
   depth: 10
 
-env:
-  global:
-    - JVMCI_VERSION="jvmci-0.36"
-    - JVMCI_BASE_JDK8="openjdk1.8.0_141"
-  matrix:
-    include:
-      - os: linux
-        dist: trusty
-        env:
-          - ZIPPY_JDK_TYPE=STANDARD_LINUX
-          - IS_GRAALJVM=FASLE
-        jdk: oraclejdk8
-        addons:
-          apt:
-            packages:
-              - oracle-java8-installer
-      - os: linux
-        # sudo will force Travis-CI to build on a machine that has larger memory (required for building JVMCI)
-        sudo: required
-        dist: trusty
-        env:
-          - ZIPPY_JDK_TYPE=GRAALJVM_LINUX
-          - BUILD_JVMCI=FALSE
-          - IS_GRAALJVM=TRUE
-        jdk: oraclejdk8
-        addons:
-          apt:
-            packages:
-              - oracle-java8-installer
-      - os: osx
-        env:
-          - ZIPPY_JDK_TYPE=STANDARD_OSX
-          - IS_GRAALJVM=FASLE
-        osx_image: xcode8.2
-      - os: osx
-        env:
-          - ZIPPY_JDK_TYPE=GRAALJVM_OSX
-          - BUILD_JVMCI=TRUE
-          - IS_GRAALJVM=TRUE
-        osx_image: xcode8.2
+global:
+  - JVMCI_VERSION="jvmci-0.36"
+  - JVMCI_BASE_JDK8="openjdk1.8.0_141"
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      env:
+        - ZIPPY_JDK_TYPE=STANDARD_LINUX
+        - IS_GRAALJVM=FASLE
+      jdk: oraclejdk8
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+    - os: linux
+      # sudo will force Travis-CI to build on a machine that has larger memory (required for building JVMCI)
+      sudo: required
+      dist: trusty
+      env:
+        - ZIPPY_JDK_TYPE=GRAALJVM_LINUX
+        - BUILD_JVMCI=FALSE
+        - IS_GRAALJVM=TRUE
+      jdk: oraclejdk8
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+    - os: osx
+      env:
+        - ZIPPY_JDK_TYPE=STANDARD_OSX
+        - IS_GRAALJVM=FASLE
+      osx_image: xcode8.2
+    - os: osx
+      env:
+        - ZIPPY_JDK_TYPE=GRAALJVM_OSX
+        - BUILD_JVMCI=TRUE
+        - IS_GRAALJVM=TRUE
+      osx_image: xcode8.2
 
 before_install:
   - echo $TRAVIS_OS_NAME
