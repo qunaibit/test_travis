@@ -43,7 +43,7 @@ matrix:
         - BUILD_JVMCI=TRUE
         - IS_JDK9=FALSE
         - IS_GRAALJVM=TRUE
-      osx_image: xcode9.1
+      osx_image: xcode8.2
     # Future JDK9 with Graal
     # - os: linux
     #   dist: trusty
