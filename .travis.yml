@@ -102,10 +102,10 @@ install:
           mx build;
           export JAVA_HOME=$(mx jdkhome);
         fi
-        
+
         mx jdkhome;
       fi
-      
+
       echo $JAVA_HOME;
       cd ../zippy;
       export DEFAULT_DYNAMIC_IMPORTS=truffle/compiler;
@@ -114,6 +114,7 @@ install:
 
 
 before_script:
+  - cd ${TRAVIS_BUILD_DIR}/../zippy;
   - mx build
 
 script:
