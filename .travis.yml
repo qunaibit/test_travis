@@ -32,18 +32,6 @@ matrix:
           packages:
             - oracle-java8-installer
             - wget
-    # Future JDK9
-    # - os: linux
-    #   dist: trusty
-    #   env:
-    #     - ZIPPY_JDK_TYPE=JVM9_LINUX
-    #     - IS_JDK9=TRUE
-    #     - IS_GRAALJVM=TRUE
-    #   jdk: oraclejdk9
-    #   addons:
-    #     apt:
-    #       packages:
-    #         - oracle-java9-installer
     - os: osx
       env:
         - ZIPPY_JDK_TYPE=STANDARD_OSX
@@ -56,7 +44,18 @@ matrix:
         - IS_JDK9=FALSE
         - IS_GRAALJVM=TRUE
       osx_image: xcode9.1
-    # Future JDK9
+    # Future JDK9 with Graal
+    # - os: linux
+    #   dist: trusty
+    #   env:
+    #     - ZIPPY_JDK_TYPE=JVM9_LINUX
+    #     - IS_JDK9=TRUE
+    #     - IS_GRAALJVM=TRUE
+    #   jdk: oraclejdk9
+    #   addons:
+    #     apt:
+    #       packages:
+    #         - oracle-java9-installer
     # - os: osx
     #   env:
     #     - ZIPPY_JDK_TYPE=JVM9_OSX
@@ -90,29 +89,37 @@ before_install:
 install:
   - git clone https://github.com/securesystemslab/zippy.git ../zippy
   - if [ "$IS_GRAALJVM" == "TRUE" ]; then
+  
       if [ "$IS_JDK9" == "FALSE" ]; then
+      
         if [ "$BUILD_JVMCI" == "FALSE" ]; then
+        
           JDK_TAR=${TRAVIS_BUILD_DIR}/../jdk.tar.gz;
           wget https://github.com/dougxc/openjdk8-jvmci-builder/releases/download/${JVMCI_VERSION}/${JVMCI_BASE_JDK8}-${JVMCI_VERSION}-linux-amd64.tar.gz -O ${JDK_TAR};
           tar -C ${TRAVIS_BUILD_DIR}/.. -xzf ${JDK_TAR};
           export JAVA_HOME=${TRAVIS_BUILD_DIR}/../${JVMCI_BASE_JDK8}-${JVMCI_VERSION};
+          
         else
+        
           cd ..;
           hg clone http://hg.openjdk.java.net/graal/graal-jvmci-8;
           cd graal-jvmci-8;
           hg update ${JVMCI_VERSION};
           mx build;
           export JAVA_HOME=$(mx jdkhome);
-        fi
+          
+        fi;
 
         mx jdkhome;
-      fi
+        
+      fi;
 
       echo $JAVA_HOME;
       cd ../zippy;
       export DEFAULT_DYNAMIC_IMPORTS=truffle/compiler;
       export ZIPPY_MUST_USE_GRAAL=1;
-    fi
+      
+    fi;
 
 
 before_script:
