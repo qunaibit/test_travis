@@ -32,17 +32,18 @@ matrix:
           packages:
             - oracle-java8-installer
             - wget
-    - os: linux
-      dist: trusty
-      env:
-        - ZIPPY_JDK_TYPE=JVM9_LINUX
-        - IS_JDK9=TRUE
-        - IS_GRAALJVM=TRUE
-      jdk: oraclejdk9
-      addons:
-        apt:
-          packages:
-            - oracle-java9-installer
+    # Future JDK9
+    # - os: linux
+    #   dist: trusty
+    #   env:
+    #     - ZIPPY_JDK_TYPE=JVM9_LINUX
+    #     - IS_JDK9=TRUE
+    #     - IS_GRAALJVM=TRUE
+    #   jdk: oraclejdk9
+    #   addons:
+    #     apt:
+    #       packages:
+    #         - oracle-java9-installer
     - os: osx
       env:
         - ZIPPY_JDK_TYPE=STANDARD_OSX
@@ -55,12 +56,13 @@ matrix:
         - IS_JDK9=FALSE
         - IS_GRAALJVM=TRUE
       osx_image: xcode9.1
-    - os: osx
-      env:
-        - ZIPPY_JDK_TYPE=JVM9_OSX
-        - IS_JDK9=TRUE
-        - IS_GRAALJVM=TRUE
-      osx_image: xcode9.1
+    # Future JDK9
+    # - os: osx
+    #   env:
+    #     - ZIPPY_JDK_TYPE=JVM9_OSX
+    #     - IS_JDK9=TRUE
+    #     - IS_GRAALJVM=TRUE
+    #   osx_image: xcode9.1
 
 before_install:
   - echo $TRAVIS_OS_NAME
