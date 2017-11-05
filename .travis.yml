@@ -44,10 +44,10 @@ before_install:
 install:
   - if [ "$IS_GRAALJVM" == "TRUE" ]; then
         if [ "$BUILD_JVMCI" == "FALSE" ]; then
-          JDK_TAR=${TRAVIS_BUILD_DIR}/../jdk.tar.gz
-          wget https://github.com/dougxc/openjdk8-jvmci-builder/releases/download/${JVMCI_VERSION}/${JVMCI_BASE_JDK8}-${JVMCI_VERSION}-linux-amd64.tar.gz -O ${JDK_TAR}
-          tar -C ${TRAVIS_BUILD_DIR}/.. -xzf ${JDK_TAR}
-          export JAVA_HOME=${TRAVIS_BUILD_DIR}/../${JVMCI_BASE_JDK8}-${JVMCI_VERSION}
+          JDK_TAR=${TRAVIS_BUILD_DIR}/../jdk.tar.gz;
+          wget https://github.com/dougxc/openjdk8-jvmci-builder/releases/download/${JVMCI_VERSION}/${JVMCI_BASE_JDK8}-${JVMCI_VERSION}-linux-amd64.tar.gz -O ${JDK_TAR};
+          tar -C ${TRAVIS_BUILD_DIR}/.. -xzf ${JDK_TAR};
+          export JAVA_HOME=${TRAVIS_BUILD_DIR}/../${JVMCI_BASE_JDK8}-${JVMCI_VERSION};
         else
           cd ..;
           hg clone http://hg.openjdk.java.net/graal/graal-jvmci-8;
