@@ -74,10 +74,7 @@ before_install:
         brew tap caskroom/cask;
 
         if [ "$IS_JDK9" == "FALSE" ]; then
-          if brew cask ls --versions "java" &>/dev/null; then
-            echo "Uninstalling Java"
-            brew cask uninstall java
-          fi
+          brew cask uninstall java
           brew cask reinstall caskroom/versions/java8;
         else
           brew cask reinstall java;
