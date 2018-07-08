@@ -21,8 +21,9 @@ matrix:
       dist: trusty
       env:
         - ZIPPY_JDK_TYPE=GRAALJVM_LINUX
-        - JVMCI_VERSION="jvmci-0.36"
-        - JVMCI_BASE_JDK8="openjdk1.8.0_141"
+        - JVMCI_VERSION="jvmci-0.46"
+        - JVMCI_BASE_JDK8_TAR="openjdk-8u172"
+        - JVMCI_BASE_JDK8="openjdk1.8.0_172"
         - BUILD_JVMCI=FALSE
         - IS_JDK9=FALSE
         - IS_GRAALJVM=TRUE
@@ -73,6 +74,10 @@ before_install:
         brew tap caskroom/cask;
 
         if [ "$IS_JDK9" == "FALSE" ]; then
+          if brew cask ls --versions "java" &>/dev/null; then
+            echo "Uninstalling Java"
+            brew cask uninstall java
+          fi
           brew cask reinstall caskroom/versions/java8;
         else
           brew cask reinstall java;
@@ -95,12 +100,12 @@ install:
         if [ "$BUILD_JVMCI" == "FALSE" ]; then
         
           JDK_TAR=${TRAVIS_BUILD_DIR}/../jdk.tar.gz;
-          wget https://github.com/dougxc/openjdk8-jvmci-builder/releases/download/${JVMCI_VERSION}/${JVMCI_BASE_JDK8}-${JVMCI_VERSION}-linux-amd64.tar.gz -O ${JDK_TAR};
+          wget https://github.com/graalvm/openjdk8-jvmci-builder/releases/download/${JVMCI_VERSION}/${JVMCI_BASE_JDK8_TAR}-${JVMCI_VERSION}-linux-amd64.tar.gz -O ${JDK_TAR};
           tar -C ${TRAVIS_BUILD_DIR}/.. -xzf ${JDK_TAR};
           export JAVA_HOME=${TRAVIS_BUILD_DIR}/../${JVMCI_BASE_JDK8}-${JVMCI_VERSION};
           
         else
-        
+          echo "Building JDK with JVMCI"
           cd ..;
           hg clone http://hg.openjdk.java.net/graal/graal-jvmci-8;
           cd graal-jvmci-8;
