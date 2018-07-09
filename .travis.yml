@@ -72,9 +72,9 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
         brew update;
         brew tap caskroom/cask;
+        brew cask search java;
 
         if [ "$IS_JDK9" == "FALSE" ]; then
-          brew cask uninstall java
           brew cask reinstall caskroom/versions/java8;
         else
           brew cask reinstall java;
@@ -89,7 +89,7 @@ before_install:
   - export PATH=$PWD/../mx:$PATH
 
 install:
-  - git clone https://github.com/securesystemslab/zippy.git ../zippy
+  - git clone https://github.com/securesystemslab/zippy.git --depth 1 ../zippy
   - if [ "$IS_GRAALJVM" == "TRUE" ]; then
   
       if [ "$IS_JDK9" == "FALSE" ]; then
