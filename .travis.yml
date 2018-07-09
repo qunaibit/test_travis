@@ -136,10 +136,10 @@ script:
   - mx -v junit
   - mx -v gate --tags pythontest
   - if [ "$TRAVIS_OS_NAME" != "osx" ] || [ "$IS_GRAALJVM" == "FALSE" ]; then
-      mx -v gate --tags pythonbenchmarktest > .out_bt
+      mx -v gate --tags pythonbenchmarktest > .out_bt;
     fi;
   - if [ "$TRAVIS_OS_NAME" != "osx" ] || [ "$IS_GRAALJVM" == "FALSE" ]; then
-      echo "$(head -n35 < .out_bt)" && echo && echo && echo "......omitted......" && echo && echo && echo "$(tail -n18 < .out_bt)"
+      echo "$(head -n35 < .out_bt)" && echo && echo && echo "......omitted......" && echo && echo && echo "$(tail -n18 < .out_bt)";
     fi;
 
 after_success:
