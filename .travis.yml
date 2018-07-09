@@ -43,6 +43,7 @@ matrix:
         - ZIPPY_JDK_TYPE=GRAALJVM_OSX
         - BUILD_JVMCI=TRUE
         - IS_JDK9=FALSE
+        - JVMCI_VERSION="jvmci-0.46"
         - IS_GRAALJVM=TRUE
       osx_image: xcode8.3
     # Future JDK9 with Graal
@@ -107,6 +108,7 @@ install:
           git clone https://github.com/graalvm/graal-jvmci-8.git --depth 1;
           cd graal-jvmci-8;
           git checkout ${JVMCI_VERSION};
+          git --no-pager log -1;
           mx --vm=server --vmbuild=product build;
           export JAVA_HOME=$(mx jdkhome);
           
