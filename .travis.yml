@@ -36,6 +36,7 @@ matrix:
     - os: osx
       env:
         - ZIPPY_JDK_TYPE=STANDARD_OSX
+        - IS_JDK9=FALSE
         - IS_GRAALJVM=FASLE
       osx_image: xcode9.1
     - os: osx
